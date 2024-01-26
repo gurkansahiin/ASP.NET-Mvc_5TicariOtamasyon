@@ -1,0 +1,41 @@
+﻿@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<faturaKalem>
+@{
+    ViewBag.Title = "FaturaDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+
+<table class="table table-condensed">
+    <tr>
+        <th> ID</th>
+        <th>Açıklama</th>
+        <th>Miktar</th>
+        <th>Birim Fiyat</th>
+        <th>Total</th>
+
+
+    </tr>
+
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.faturaKalemID</td>
+
+            <td>@x.aciklama</td>
+            <td>@x.miktar</td>
+            <td>@x.birimFiyat ₺</td>
+            <td>@x.tutar ₺</td>
+
+
+
+
+
+
+        </tr>
+    }
+
+</table>
+
+

@@ -1,0 +1,50 @@
+﻿@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Personel Alanı</h2>
+
+<br />
+
+<table class="table table-striped">
+    <tr>
+        
+        <th>Personel Ad</th>
+        <th>Personel Soyad</th>
+        <th>Departman</th>
+        <th>Görsel</th>
+
+     
+        @*<th>Sil</th>*@
+        <th>Güncelle</th>
+        <th> Detay</th>
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+           
+            <td class="py-5">@c.PersonelAd</td>
+            <td class="py-5" >@c.PersonelSoyAD</td>
+            <td class="py-5">@c.departman.departmanAD</td>
+            <td>
+                <img src="@c.personelgörsel"  style="width:120px;height:120px; border-radius:50%;" />
+            </td>
+
+     
+            @*<td><a href="/Personel/PersonelSil/@c.PersonelID" class="btn btn-danger">Sil</a></td>*@
+            <td><a href="/Personel/PersonelGetir/@c.PersonelID" class="btn btn-success  mt-4">Güncelle</a></td>
+            <td><a href="/Departman/DepartmanPersonelSatis/@c.PersonelID" class="btn btn-info  mt-4">Satışlar</a></td>
+
+        </tr>
+    }
+
+
+
+</table>
+
+<a href="/Personel/PersonelEkle" class="btn btn-primary">Personel Ekle</a>

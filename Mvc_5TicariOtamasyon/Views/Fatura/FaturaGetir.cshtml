@@ -1,0 +1,35 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.faturalar
+@{
+    ViewBag.Title = "FaturaGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+@using (Html.BeginForm("FaturaGuncelle", "Fatura", FormMethod.Post))
+{
+
+
+    @Html.LabelFor(x => x.faturaSıraNo)
+    @Html.TextBoxFor(x => x.faturaSıraNo, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.faturaSeriNo)
+    @Html.TextBoxFor(x => x.faturaSeriNo, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.vergiDairesi)
+    @Html.TextBoxFor(x => x.vergiDairesi, new { @class = "form-control" })
+    <br />
+
+    @Html.LabelFor(x => x.teslimEden)
+    @Html.TextBoxFor(x => x.teslimEden, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.teslimAlan)
+    @Html.TextBoxFor(x => x.teslimAlan, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.faturaTarih)
+    @Html.TextBoxFor(x => x.faturaTarih, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.saat)
+    @Html.TextBoxFor(x => x.saat, new { @class = "form-control" })
+    @Html.HiddenFor(x=>x.faturaID)
+    <button class="btn btn-primary mt-3">Kaydet</button>
+}
+

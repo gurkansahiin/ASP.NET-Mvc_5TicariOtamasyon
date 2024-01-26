@@ -1,0 +1,49 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.urun
+@{
+    ViewBag.Title = "UrunGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Urun Güncelle</h2>
+<br />
+@using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
+    {
+
+<div class="form-group">
+
+    @Html.LabelFor(x => x.urunAD)
+    @Html.TextBoxFor(x => x.urunAD, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.marka)
+    @Html.TextBoxFor(x => x.marka, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.stock)
+    @Html.TextBoxFor(x => x.stock, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.AlisFiyati)
+    @Html.TextBoxFor(x => x.AlisFiyati, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.SatisFiyati)
+    @Html.TextBoxFor(x => x.SatisFiyati, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.urunAciklama)
+    @Html.TextAreaFor(x => x.urunAciklama, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.urunOzellikler)
+    @Html.TextAreaFor(x => x.urunOzellikler, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.durum)
+    @Html.TextBoxFor(x => x.durum, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.kategori.kategoriID)
+    @Html.DropDownListFor(x => x.kategoriID, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.urungörsel)
+    @Html.TextBoxFor(x => x.urungörsel, new { @class = "form-control" })
+    @Html.HiddenFor(x => x.urunID)
+    <button class="btn btn-warning mt-3">Güncelle</button>
+
+</div>
+
+}
+

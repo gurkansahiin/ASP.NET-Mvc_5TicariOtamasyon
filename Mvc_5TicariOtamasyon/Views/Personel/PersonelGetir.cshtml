@@ -1,0 +1,35 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.personel
+@{
+    ViewBag.Title = "PersonelGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Güncelleme Sayfası</h2>
+<br />
+
+@using (Html.BeginForm("PersonelGuncelle", "Personel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.LabelFor(x => x.PersonelAd)
+    @Html.TextBoxFor(x => x.PersonelAd, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.PersonelSoyAD)
+    @Html.TextBoxFor(x => x.PersonelSoyAD, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.personelgörsel)
+    @*@Html.TextBoxFor(x => x.personelgörsel, new { @class = "form-control" })*@
+    <input type="file" name="personelgörsel" />
+    <br />
+    @*@Html.LabelFor(x => x.durum)
+        @Html.TextBoxFor(x => x.durum, new { @class = "form-control" })
+        <br />*@
+    @Html.LabelFor(x => x.departman)
+    @Html.DropDownListFor(x => x.departmanid, (List<SelectListItem>)ViewBag.dgr2, new { @class = "form-control" })
+    @*@Html.TextBoxFor(x => x.kategoriID, new { @class = "form-control" })*@
+    @Html.HiddenFor(x => x.PersonelID)
+
+    <button class="btn btn-primary mt-3">Kaydet</button>
+
+
+}
+

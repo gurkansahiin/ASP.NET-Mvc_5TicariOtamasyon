@@ -1,0 +1,67 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.satis_hareketi
+@{
+    ViewBag.Title = "SatisEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<br />
+<h2>Yeni Satış Ekle</h2>
+<br />
+<form class="form-group" method="post" id="cariForm">
+    @Html.LabelFor(x => x.urun)
+    @Html.DropDownListFor(x => x.urunid, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.cari)
+    @Html.DropDownListFor(x => x.cariid, (List<SelectListItem>)ViewBag.dgr2, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.personel)
+    @Html.DropDownListFor(x => x.personelid, (List<SelectListItem>)ViewBag.dgr3, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.adet)
+    @Html.TextBoxFor(x => x.adet, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.fiyat)
+    @Html.TextBoxFor(x => x.fiyat, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.toplamtutar)
+    @Html.TextBoxFor(x => x.toplamtutar, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-primary mt-3" id="btn1">Kaydet</button>
+    <script>
+        $('#btn1').click(function (e) {
+            e.preventDefault();
+
+            swal({
+                title: "Good Job!",
+                text: "İşlem Başarılı!",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Tamam",
+                        value: true,
+                        visible: true,
+                        closeModal: true // Bildirimi otomatik kapatma
+                    }
+                }
+            }).then((value) => {
+                if (value) {
+                    // Ekleme işlemini AJAX ile gerçekleştir
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("SatisEkle", "Satis")', // ControllerName ve action adını uygun şekilde değiştirin
+                        data: $('#cariForm').serialize(), // Form verilerini al
+                        success: function (data) {
+                            // İşlem başarılı olduğunda bu bölüm çalışır
+                            // Burada gerekli yönlendirme veya diğer işlemleri yapabilirsiniz
+                             window.location.href = '@Url.Action("Index", "Satis")'; // Yönlendirme için uygun URL'yi belirtin
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+</form>
+

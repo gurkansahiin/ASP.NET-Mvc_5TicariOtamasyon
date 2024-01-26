@@ -1,0 +1,76 @@
+﻿ <!-- /.card -->
+@model IEnumerable<Mvc_5TicariOtamasyon.Models.sınıflar.grupsinif2>
+@*//controller tarafında verileri tablodan değil de sınnıfftan çektiğim için IEnumerable kullanacağım*@
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Departman Personel İlişkisi </h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Departman</th>
+                        <th>Progress Bar</th>
+                        <th style="width: 40px">Sayı</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int sirano = 0;} @*//değişkeni böyle tanımlamış olduk*@
+                    @foreach (var x in Model)
+                    {
+
+
+                        <tr>
+                            <td>@{sirano++;} @sirano</td> @*sıranoyu arttırdık ve yazdırdık*@
+                            <td>@x.departman</td>
+                            <td>
+                                @if (x.sayi == 1)
+                                {
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                    </div>
+                                }
+                                @if (x.sayi == 2)
+                                {
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar progress-bar-success" style="width: 70%"></div>
+                                    </div>
+                                }
+                                @if (x.sayi == 3)
+                                {
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar progress-bar-warning" style="width: 85%"></div>
+                                    </div>
+                                }
+                            </td>
+                            @if (x.sayi == 1)
+                            {
+                                <td><span class="badge bg-danger">@x.sayi</span></td>
+
+
+                            }
+                            @if (x.sayi == 2)
+                            {
+                                <td><span class="badge bg-primary">@x.sayi</span></td>
+
+
+                            }
+                            @if (x.sayi == 3)
+                            {
+                                <td><span class="badge bg-warning">@x.sayi</span></td>
+
+
+                            }
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->

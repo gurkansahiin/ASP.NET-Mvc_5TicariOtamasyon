@@ -1,0 +1,73 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.faturalar
+@{
+    ViewBag.Title = "FaturaEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<form method="post" class="form-group" id="cariForm">
+
+    @Html.LabelFor(x => x.faturaSıraNo)
+    @Html.TextBoxFor(x => x.faturaSıraNo, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.faturaSeriNo)
+    @Html.TextBoxFor(x => x.faturaSeriNo, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.vergiDairesi)
+    @Html.TextBoxFor(x => x.vergiDairesi, new { @class = "form-control" })
+    <br />
+
+    @Html.LabelFor(x => x.teslimEden)
+    @Html.TextBoxFor(x => x.teslimEden, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.teslimAlan)
+    @Html.TextBoxFor(x => x.teslimAlan, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.faturaTarih)
+    @Html.TextBoxFor(x => x.faturaTarih, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.saat)
+    @Html.TextBoxFor(x => x.saat, new { @class = "form-control" })
+
+
+    <button class="btn btn-primary mt-3" id="btn1">Ekle</button>
+
+
+    <script>
+        $('#btn1').click(function (e) {
+            e.preventDefault();
+
+            swal({
+                title: "Good Job!",
+                text: "İşlem Başarılı!",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Tamam",
+                        value: true,
+                        visible: true,
+                        closeModal: true // Bildirimi otomatik kapatma
+                    }
+                }
+            }).then((value) => {
+                if (value) {
+                    // Ekleme işlemini AJAX ile gerçekleştir
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("FaturaEkle", "Fatura")', // ControllerName ve action adını uygun şekilde değiştirin
+                        data: $('#cariForm').serialize(), // Form verilerini al
+                        success: function (data) {
+                            // İşlem başarılı olduğunda bu bölüm çalışır
+                            // Burada gerekli yönlendirme veya diğer işlemleri yapabilirsiniz
+                             window.location.href = '@Url.Action("Index", "Fatura")'; // Yönlendirme için uygun URL'yi belirtin
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</form>
+

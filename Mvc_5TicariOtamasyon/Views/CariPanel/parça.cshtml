@@ -1,0 +1,92 @@
+﻿
+@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<urun>
+<head>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/aos.css">
+
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/style.css">
+
+</head>
+<!-- Owl Carousel CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+<!-- Owl Carousel JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<br />
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 site-section-heading text-center pt-4">
+            <h3 style="position:absolute;left:-215px; bottom:30px;"  class="fs-6">Diğer Ürünlerimiz </h3>
+            <br />
+        </div>
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="productCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    @for (int i = 0; i < Model.Count; i += 4)
+                    {
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <div class="row">
+                                @for (int j = i; j < i + 4 && j < Model.Count; j++)
+                                {
+                                    <div class="col-md-3">
+                                        <div class="block-4 text-center">
+                                            <figure class="block-4-image">
+                                                <a href="/CariPanel/UrunDetay/@Model[j].urunID"><img src="@Model[j].urungörsel" href style="height: 200px; width:100% ;border-radius:20px;" alt="Image placeholder" class="img-fluid"></a>
+                                            </figure>
+                                            <div class="block-4-text p-4">
+                                                <h3><a href="#">@Model[j].urunAD</a></h3>
+                                                <p class="mb-0">@Model[j].kategori.kategoriAD</p>
+                                                <p class="text-primary font-weight-bold">₺@Model[j].SatisFiyati</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/015 shoppers-gh-pages/jquery-3.4.1.min.js"></script>
+<script src="~/015 shoppers-gh-pages/js/jquery-3.3.1.min.js"></script>
+<script src="~/015 shoppers-gh-pages/js/jquery-ui.js"></script>
+<script src="~/015 shoppers-gh-pages/js/popper.min.js"></script>
+<script src="~/015 shoppers-gh-pages/js/bootstrap.min.js"></script>
+<script src="~/015 shoppers-gh-pages/js/owl.carousel.min.js"></script>
+<script src="~/015 shoppers-gh-pages/js/jquery.magnific-popup.min.js"></script>
+<script src="~/015 shoppers-gh-pages/js/aos.js"></script>
+
+<script src="~/015 shoppers-gh-pages/js/main.js"></script>

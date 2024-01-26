@@ -1,0 +1,49 @@
+﻿@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<KargoTakip>
+@{
+    ViewBag.Title = "CariKargotakip";
+    Layout = "~/Views/Shared/_CariPanelLayout.cshtml";
+}
+
+<br />
+
+@{
+    int sayac = 1;
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Takip Kodu</th>
+        <th>Tarih</th>
+        <th>Açıklama</th>
+
+
+
+
+    </tr>
+
+
+    @foreach (var c in Model)
+    {
+        <tr>
+
+            <td>@sayac -</td>
+            <td>@c.TakipKod</td>
+            <td>@Convert.ToDateTime(c.tarih).ToString("dd/MM/yyyy")</td>
+            <td>@c.aciklama</td>
+
+
+
+
+
+
+
+        </tr>
+        sayac++;
+    }
+
+
+
+</table>
+

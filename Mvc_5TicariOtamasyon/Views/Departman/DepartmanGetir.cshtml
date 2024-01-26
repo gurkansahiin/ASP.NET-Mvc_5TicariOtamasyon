@@ -1,0 +1,24 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.departman
+
+@{
+    ViewBag.Title = "DepartmanGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Güncelleme Sayfası</h2>
+<br />
+
+@using (Html.BeginForm("DepartmanGuncelle", "Departman", FormMethod.Post)) //bu sayfa yüklendikten sonra post işlemi  gerçekleştirdiğimde hangi ActionResult işlemi çalışacak
+                                                                        //KategoriGuncelle isminde ActionResult tanımladım  Kategori controllerin içinde FormMethod.Post olduğunda çalışacak
+{
+    <div class="form-group ">
+        @Html.LabelFor(x =>x.departmanAD )
+        @Html.TextBoxFor(x => x.departmanAD, new { @class = "form-control mt-1 " })
+        @Html.HiddenFor(x => x.departmanID)
+        <button class="btn btn-info mt-3">Güncelle</button>
+    </div>
+
+
+}
+

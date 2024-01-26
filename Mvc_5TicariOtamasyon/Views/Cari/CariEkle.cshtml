@@ -1,0 +1,64 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.cari
+@{
+    ViewBag.Title = "CariEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<br />
+<h2>Cari Ekle</h2>
+<br />
+<form method="post" class="form-group" id="cariForm">
+    @Html.LabelFor(x => x.cariAd)
+    @Html.TextBoxFor(x => x.cariAd, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.cariSoyad)
+    @Html.TextBoxFor(x => x.cariSoyad, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.cariSehir)
+    @Html.TextBoxFor(x => x.cariSehir, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.cariMail)
+    @Html.TextBoxFor(x => x.cariMail, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.durum)
+    @Html.TextBoxFor(x => x.durum, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-default text-white" style="background-color:darkslateblue" id="btn1">Ekle</button>
+
+    <script>
+        $('#btn1').click(function (e) {
+            e.preventDefault();
+
+            swal({
+                title: "Good Job!",
+                text: "İşlem Başarılı!",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Tamam",
+                        value: true,
+                        visible: true,
+                        closeModal: true // Bildirimi otomatik kapatma
+                    }
+                }
+            }).then((value) => {
+                if (value) {
+                    // Ekleme işlemini AJAX ile gerçekleştir
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("CariEkle", "Cari")', // ControllerName ve action adını uygun şekilde değiştirin
+                        data: $('#cariForm').serialize(), // Form verilerini al
+                        success: function (data) {
+                            // İşlem başarılı olduğunda bu bölüm çalışır
+                            // Burada gerekli yönlendirme veya diğer işlemleri yapabilirsiniz
+                             window.location.href = '@Url.Action("Index", "Cari")'; // Yönlendirme için uygun URL'yi belirtin
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+</form>
+

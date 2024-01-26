@@ -1,0 +1,87 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.satis_hareketi
+@{
+    ViewBag.Title = "UrunSatis";
+    Layout = "~/Views/Shared/_CariPanelLayout.cshtml";
+}
+
+<h2>UrunSatis</h2>
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<br />
+
+<form class="form-group" method="post" id="cariForm">
+    @Html.LabelFor(x => x.urunid)
+    <input type="text" name="urunid" value="@ViewBag.dgr2" class="form-control" readonly  />
+    <br />
+    @Html.LabelFor(x => x.personelid)
+    @Html.DropDownListFor(x => x.personelid, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+    @*<br />
+    @Html.LabelFor(x => x.cariid)
+    <input type="text" name="cariid" value="@ViewBag.idsi" class="form-control" readonly  />*@
+
+    <br />
+    @Html.LabelFor(x => x.adet)
+    <input type="number" name="adet" class="form-control" placeholder="Adet Giriniz" min="1" id="txt1" onchange="sum();" /> @*değişiklik olduğunda (onchange.)="sum();"  sum methodu devreye girsins*@
+    <br />
+    @Html.LabelFor(x => x.fiyat)
+    <input type="text" name="fiyat" value="@ViewBag.dgr3" class="form-control" id="txt2" onkeyup="sum();" />
+
+    <br />
+    @Html.LabelFor(x => x.toplamtutar)
+    <input type="text" name="toplamtutar" class="form-control" id="txt3" readonly />
+    <br />
+    @Html.LabelFor(x => x.tarih)
+    <input type="date" name="tarih" class="form-control" />
+
+    <br />
+
+    <button class="btn btn-primary mt-3" id="btn1">Ekle</button>
+
+</form>
+
+<script>
+    function sum() {
+        var sayi1 = document.getElementById('txt1').value;
+        var sayi2 = document.getElementById('txt2').value;
+        var sonuc = parseInt(sayi1) * parseInt(sayi2);
+
+        if (!isNaN(sonuc)) {
+            document.getElementById('txt3').value = sonuc;
+        }
+    }
+
+     $('#btn1').click(function (e) {
+            e.preventDefault();
+
+            swal({
+                title: "Good Job!",
+                text: "İşlem Başarılı!",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Tamam",
+                        value: true,
+                        visible: true,
+                        closeModal: true // Bildirimi otomatik kapatma
+                    }
+                }
+            }).then((value) => {
+                if (value) {
+                    // Ekleme işlemini AJAX ile gerçekleştir
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("UrunSatis", "CariPanel")', // ControllerName ve action adını uygun şekilde değiştirin
+                        data: $('#cariForm').serialize(), // Form verilerini al
+                        success: function (data) {
+                            // İşlem başarılı olduğunda bu bölüm çalışır
+                            // Burada gerekli yönlendirme veya diğer işlemleri yapabilirsiniz
+                             window.location.href = '@Url.Action("Siparisler", "CariPanel")'; // Yönlendirme için uygun URL'yi belirtin
+                        }
+                    });
+                }
+            });
+        });
+</script>

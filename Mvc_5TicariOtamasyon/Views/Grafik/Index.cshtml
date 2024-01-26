@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+@*@{
+
+        var grfk = new Chart(width: 500, height: 500);
+
+        grfk.AddTitle(text: "Kategoriler ve Ürün Sayıları");
+        grfk.AddLegend(title: "Değerler");
+        grfk.AddSeries(
+            name:"Veriler",
+            //   chartType yazmazsak normal grafik formatında geliyor degerler  Pie=>Pasta dilimi Area=>Tepecikli bölge bar=>soldan çıkan
+            chartType: "Pie",
+            xValue: new[] {"Beyaz Eşya","Televizyon","Bilgisayar","Küçük Ev Aleti"},
+            yValues: new[] {500,250,340,620}
+
+
+            );
+
+
+        grfk.Write();
+    }*@
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Action("kategoriurun", "Grafik")
+                <!-- /.card -->
+                <br /> <br />
+                @*partial viewi Basictablolar viewin içine dahil etmiş oluyorum !!!!*@
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+
+                <!-- /.card -->
+                @Html.Action("Partial4", "İstatistik")
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        @Html.Action("kategoriurun2", "Grafik")
+
+
+        <!-- /.row -->
+        @Html.Action("kategoriurun", "Grafik")
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+
+

@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index3";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Result Visualization</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(function () {
+            drawChart(@Html.Raw(Json.Encode(ViewBag.ChartData))); // Verileri JavaScript nesnesine dönüştür
+        });
+
+        function drawChart(chartData) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('number', 'Stoklar');
+
+            for (var i = 0; i < chartData.length; i++) {
+                data.addRow([chartData[i].urnad, chartData[i].stock]);
+            }
+
+            var columnChartOptions = {
+                title: "Ürün/Stok İlişkisi",
+                titleTextStyle: {
+                    fontSize: 18,
+                    bold: true
+                },
+                titlePosition: 'left',
+                width: 1200,
+                height: 400,
+                bar: { groupWidth: "20%" },
+            };
+
+            var columnChart = new google.visualization.ColumnChart(document.getElementById('columnchart_div'));
+            columnChart.draw(data, columnChartOptions);
+        }
+    </script>
+</head>
+<body>
+    <div id="columnchart_div" class="text-center"></div>
+
+
+</body>
+</html>

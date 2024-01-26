@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Index5";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h3 class=" fs-4 mt-3 " style="font-size:initial"> Ürün/Stok Grafiği</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result Visualization</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(function () {
+                // Sayfa yüklendiğinde ilk grafiği çiz
+                drawDefaultChart();
+            });
+        });
+
+        function drawDefaultChart() {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("VisualizeUrunResult2", "Grafik")',
+                success: function (result) {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Name');
+                    data.addColumn('number', 'Stoklar');
+                    var dataArray = [];
+                    $.each(result, function (i, obj) {
+                        dataArray.push([obj.urnad, obj.stk]);
+                    });
+                    data.addRows(dataArray);
+
+                    var chartOptions = {
+
+                        titleTextStyle: {
+                            fontSize: 18, // Başlık yazısının font boyutu (px cinsinden)
+                            bold: true    // Kalın yazı
+                        },
+                        width: 1200,
+                        height: 900,
+                        bar: { groupWidth: "20%" },
+                    };
+
+                    var columnChart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                    columnChart.draw(data, chartOptions);
+
+
+
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="chart_div" class="text-center"></div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿
+@model Mvc_5TicariOtamasyon.Models.sınıflar.kategori
+@*k parametresini kullanmak için model oluşturuk*@
+
+@{
+    ViewBag.Title = "KategoriEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2> Yeni Kategori Ekle</h2>
+
+<br />
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@*k parametresinden gelecek olan degerleri de view ile halldeceğiz demiştik*@
+
+
+<form class="form-group" method="post" id="cariForm">
+
+    @Html.LabelFor(x => x.kategoriAD)   @*//x öyleki kategoriADı labela ata*@
+    <br />
+    @Html.TextBoxFor(x => x.kategoriAD, new { @class = "form-control" })   @*//x öyleki kategoriADı textboxa ata*@
+    <button class="btn btn-primary mt-3" id="btn1">Kaydet</button> @*yanda k parametreisine degerleri ekliyoruz*@
+
+    <script>
+        $('#btn1').click(function (e) {
+            e.preventDefault();
+
+            swal({
+                title: "Good Job!",
+                text: "İşlem Başarılı!",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Tamam",
+                        value: true,
+                        visible: true,
+                        closeModal: true // Bildirimi otomatik kapatma
+                    }
+                }
+            }).then((value) => {
+                if (value) {
+                    // Ekleme işlemini AJAX ile gerçekleştir
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("KategoriEkle", "Kategori")', // ControllerName ve action adını uygun şekilde değiştirin
+                        data: $('#cariForm').serialize(), // Form verilerini al
+                        success: function (data) {
+                            // İşlem başarılı olduğunda bu bölüm çalışır
+                            // Burada gerekli yönlendirme veya diğer işlemleri yapabilirsiniz
+                             window.location.href = '@Url.Action("Index", "Kategori")'; // Yönlendirme için uygun URL'yi belirtin
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</form>

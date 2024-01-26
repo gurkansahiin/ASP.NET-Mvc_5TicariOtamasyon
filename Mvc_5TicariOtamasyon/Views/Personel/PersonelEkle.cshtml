@@ -1,0 +1,51 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.personel
+@{
+    ViewBag.Title = "PersonelEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<br />
+<h2>Personel Ekle</h2>
+<br />
+
+@*{ enctype = "multipart/form-data" } =>dosya yükleme işleminde beginformda kullanılıyor.*@
+@using (Html.BeginForm("PersonelEkle", "Personel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <form class="form-group" method="post">
+        @Html.LabelFor(x => x.PersonelAd)
+        @Html.TextBoxFor(x => x.PersonelAd, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(x => x.PersonelSoyAD)
+        @Html.TextBoxFor(x => x.PersonelSoyAD, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(x => x.personelgörsel)
+        @*@Html.TextBoxFor(x => x.personelgörsel, new { @class = "form-control" })*@
+        <input type="file" name="personelgörsel" />
+        <br />
+
+        @Html.LabelFor(x => x.PersonelSehir)
+        @Html.TextBoxFor(x => x.PersonelSehir, new { @class = "form-control" })
+        <br />
+
+        @Html.LabelFor(x => x.PersonelTel)
+        @Html.TextBoxFor(x => x.PersonelTel, new { @class = "form-control" })
+        @*@Html.LabelFor(x => x.durum)
+        @Html.TextBoxFor(x => x.durum, new { @class = "form-control" })
+        <br />*@
+        @Html.LabelFor(x => x.departman)
+        @Html.DropDownListFor(x => x.departmanid, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+        @*@Html.TextBoxFor(x => x.kategoriID, new { @class = "form-control" })*@
+
+
+        <button class="btn btn-primary mt-3" id="btn1">Kaydet</button>
+
+        <script>
+            $('#btn1').click(function () {
+
+                swal("Good job!", "İşlem Başarılı", "success");
+            });
+        </script>
+
+    </form>
+}

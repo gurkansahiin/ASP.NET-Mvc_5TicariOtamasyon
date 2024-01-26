@@ -1,0 +1,35 @@
+﻿
+@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<personel>
+@{
+    ViewBag.Title = "DepartmanDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2 class="fs-4">Departman Detay Sayfası </h2>
+<br />
+<div class="bg-light py-3 px-2 " style="font:bold;font-weight:600;">
+    Departman Ad:  @ViewBag.d
+</div>
+<br />
+<table class="table table-hover">
+    <tr>
+      
+        <th>Ad Soyad</th>
+      
+
+        <th>SATIŞLAR</th>
+    </tr>
+    @foreach (var i in Model)
+    {
+    <tr>
+    
+        <td>@i.PersonelAd @i.PersonelSoyAD</td>
+      
+    
+        <td><a href="/Departman/DepartmanPersonelSatis/@i.PersonelID" class="btn btn-dark">Satışlar</a></td>
+
+    </tr>
+    }
+</table>
+

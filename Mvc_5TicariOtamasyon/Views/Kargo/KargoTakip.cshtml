@@ -1,0 +1,95 @@
+﻿
+@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<KargoTakip>
+@{
+    ViewBag.Title = "KargoTakip";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<table class="table table-striped">
+    <tr>
+        <th>Takip Kodu</th>
+        <th>Tarih</th>
+        <th>Açıklama</th>
+
+
+
+
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+
+
+            <td>@c.TakipKod</td>
+            <td>@Convert.ToDateTime(c.tarih).ToString("dd/MM/yyyy")</td>
+            <td>@c.aciklama</td>
+
+
+
+
+
+
+
+        </tr>
+    }
+
+
+
+</table>
+<button class="btn btn-default text-white" style="background-color:darkslateblue" data-bs-toggle="modal" data-bs-target="#newOrderModal">Ekle</button>
+
+<div class="modal fade" id="newOrderModal">
+    <div class="modal-dialog modal-lg" style="width: 900px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4>Kargo Güncelleme Paneli</h4>
+            </div>
+            <form id="NewOrderForm" action="@Url.Action("KargoKaydet", "Kargo")" method="post">
+                <div class="modal-body">
+                    @* Fatura Detayları *@
+                    <h5 style="color:#ff6347">Kargo Detayları</h5>
+                    <hr />
+                    <div class="form-horizontal">
+                        <input type="hidden" id="KargoTakipId" />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Takip Kod</label>
+                                    <input type="text" id="TakipKod" value="@ViewBag.id" name="TakipKod" readonly class="form-control" />
+                                </div>
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Açıklama</label>
+                                    <input type="text" id="aciklama" name="aciklama" placeholder="aciklama" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Tarih</label>
+                                    <input type="text" id="tarih" name="tarih" value="@ViewBag.trh" class="form-control" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button id="saveOrder" type="submit" class="btn btn-danger">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

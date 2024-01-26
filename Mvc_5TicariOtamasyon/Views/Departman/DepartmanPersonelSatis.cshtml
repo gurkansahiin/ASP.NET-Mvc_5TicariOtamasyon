@@ -1,0 +1,44 @@
+﻿@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<satis_hareketi>
+@{
+    ViewBag.Title = "DepartmanPersonelSatis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2 class="fs-4">Departman Personel Satış Sayfası </h2>
+<br />
+<div class="bg-light py-3 px-2 " style="font:bold;font-weight:600;">
+    Personel Ad:  @ViewBag.dpersonel
+</div>
+
+<br />
+
+<table class="table table-condensed">
+    <tr>
+        <th>Satış ID</th>
+        <th>Ürün</th>
+        <th>Cari</th>
+        <th>Fiyat</th>
+        <th>Adet</th>
+        <th>Toplam</th>
+        <th>Tarih</th>
+        <th>Yazdır</th>
+    </tr>
+
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.satisID</td>
+            <td>@x.urun.urunAD</td>
+            <td>@x.cari.cariAd @x.cari.cariSoyad</td>
+            <td>@x.fiyat</td>
+            <td>@x.adet</td>
+            <td>@x.toplamtutar</td>
+            <td>@Convert.ToDateTime(x.tarih).ToString("dd/MM/yyyy")</td>
+            <td><a href="/Departman/DepartmanPersSatisYazdır/@x.satisID" class="btn btn-info">Yazdır</a></td>
+        </tr>
+            }
+       
+    </table>
+

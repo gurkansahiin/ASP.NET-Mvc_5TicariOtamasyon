@@ -1,0 +1,65 @@
+﻿@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<urun>
+@{
+    ViewBag.Title = "Urun";
+    Layout = "~/Views/Shared/_CariPanelLayout.cshtml";
+}
+
+
+
+<br />
+
+
+
+
+<table class="table table-bordered table-hover" style="margin-top: 20px;" id="tbl1">
+    <thead>
+        <tr class=" text-white table-dark">
+
+
+            <th>ÜRÜN</th>
+            <th>MARKA</th>
+
+            <th>KATEGORİ</th>
+            @*<th>GÖRSEL</th>*@
+            <th>SATIŞ FİYATI</th>
+            <th>Detaylar</th>
+
+        </tr>
+    </thead>
+    @foreach (var u in Model)
+    {
+        <tr>
+
+            <td class="pt-4">@u.urunAD</td>
+            <td class="pt-4">@u.marka</td>
+
+            <td class="pt-4">@u.kategori.kategoriAD</td>
+            <!--<td style=" height: 110px; padding: 0;" class="p-2">-->
+            @*<img src="@u.urungörsel" class="img-fluid " style="height: 100%; width: 100%; object-fit: cover;" />*@
+            <!--</td>-->
+            <td class="pt-4">@u.SatisFiyati ₺</td>
+            <td><a href="/CariPanel/UrunDetay/@u.urunID" class="btn btn-outline-dark  mt-4 text-center">Detaylar</a></td>
+        </tr>
+
+
+    }
+</table>
+<a href="/Urun/UrunEkle" class="btn btn-primary">Ürün Ekle</a>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+
+<script>
+    $('#tbl1').dataTable({});
+</script>
+
+

@@ -1,0 +1,67 @@
+﻿
+
+
+@using Mvc_5TicariOtamasyon.Models.sınıflar
+
+@model List<mesajlar>
+
+@foreach (var x in Model)
+{
+
+
+<div class="timeline timeline-inverse">
+
+    <!-- timeline time label -->
+    <!-- /.timeline-label -->
+    <!-- timeline item -->
+    <!-- END timeline item -->
+    <!-- timeline item -->
+    <!-- END timeline item -->
+    <!-- timeline item -->
+    <div class="time-label">
+
+        <span class="bg-danger">
+
+            @Convert.ToDateTime(x.tarih).ToString("dd/MM/yyyy")
+
+        </span>
+
+    </div>
+
+    <div>
+
+
+        <i class="fas fa-comments bg-warning"></i>
+
+        <div class="timeline-item">
+
+            <span class="time"><i class="far fa-clock"></i>  @Convert.ToDateTime(x.tarih).ToString("dd/MM/yyyy")</span>
+
+            <h3 class="timeline-header"><a href="#">@x.gönderici</a> </h3>
+
+            <div class="timeline-body">
+
+                @x.icerik
+
+            </div>
+
+            <div class="timeline-footer">
+
+                @*<a href="#" class="btn btn-warning btn-flat btn-sm">Detayla</a>*@
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- END timeline item -->
+    <!-- timeline time label -->
+    <!-- /.timeline-label -->
+    <!-- timeline item -->
+    <!-- END timeline item -->
+
+</div>
+
+}

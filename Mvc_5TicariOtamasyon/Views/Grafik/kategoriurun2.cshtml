@@ -1,0 +1,49 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Result Visualization</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(function () {
+            drawChart(@Html.Raw(Json.Encode(ViewBag.ChartData))); // Verileri JavaScript nesnesine dönüştür
+        });
+
+        function drawChart(chartData) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('number', 'Kategoriler');
+
+            for (var i = 0; i < chartData.length; i++) {
+                data.addRow([chartData[i].kateg, chartData[i].urun]);
+            }
+
+            var columnChartOptions = {
+       
+                titleTextStyle: {
+                    fontSize: 18,
+                    bold: true
+                },
+                titlePosition: 'right',
+                width: 1200,
+                height: 700,
+                bar: { groupWidth: "20%" },
+            };
+
+            var columnChart = new google.visualization.AreaChart(document.getElementById('chart_div1'));
+            columnChart.draw(data, columnChartOptions);
+        }
+    </script>
+</head>
+<body>
+    <div id="chart_div1" class="text-center"></div>
+
+
+   
+</body>
+</html>
+

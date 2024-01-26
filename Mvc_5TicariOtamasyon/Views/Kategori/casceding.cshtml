@@ -1,0 +1,57 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.Casceding
+@{
+    ViewBag.Title = "casceding";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+
+    $(function () {
+
+        $('#drpKategori').change(function () {
+
+            var id = $('#drpKategori').val();
+
+            $.ajax({
+
+                url: '/Kategori/cascedingbagla',
+
+                data: { p: id },
+
+                type: "POST",
+
+                dataType: "Json",
+
+                success: function (data) {
+
+                    console.log(data);
+
+                    $('#drpUrun').empty();
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        $('#drpUrun').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+
+                    }
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<br />
+<div><h2>Kategoriler-Ürünler</h2></div>
+<br />
+<div>
+    @Html.Label("Kategoriler")
+    @Html.DropDownList("drpKategori", Model.Kategoriler, "--Kategori Seçiniz--", new { @class = "form-control" })
+    <br />
+    @Html.Label("Ürunler")
+    @Html.DropDownList("drpUrun", Model.Urunler, "--Ürün Seçiniz--", new { @class = "form-control" })
+</div>
+

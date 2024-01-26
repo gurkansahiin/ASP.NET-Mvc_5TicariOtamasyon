@@ -1,0 +1,83 @@
+﻿
+@model Mvc_5TicariOtamasyon.Models.sınıflar.urun
+@{
+    ViewBag.Title = "UrunEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<br />
+<h2>Yeni Ürün Ekle</h2>
+<br />
+<form class="form-group" method="post" id="cariForm">
+    @Html.LabelFor(x => x.urunAD)
+    @Html.TextBoxFor(x => x.urunAD, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.marka)
+    @Html.TextBoxFor(x => x.marka, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.stock)
+    @Html.TextBoxFor(x => x.stock, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.AlisFiyati)
+    @Html.TextBoxFor(x => x.AlisFiyati, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.SatisFiyati)
+    @Html.TextBoxFor(x => x.SatisFiyati, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.durum)
+    @Html.TextBoxFor(x => x.durum, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.urunAciklama)
+    @Html.TextAreaFor(x => x.urunAciklama, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.urunOzellikler)
+    @Html.TextAreaFor(x => x.urunOzellikler, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.kategori.kategoriID)
+    @Html.DropDownListFor(x => x.kategoriID, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+    @*@Html.TextBoxFor(x => x.kategoriID, new { @class = "form-control" })*@
+
+    <br />
+    @Html.LabelFor(x => x.urungörsel)
+    @Html.TextBoxFor(x => x.urungörsel, new { @class = "form-control" })
+    <button class="btn btn-primary mt-3" id="btn1">Kaydet</button>
+    @*sweeralert*@
+    <script>
+        $('#btn1').click(function (e) {
+            e.preventDefault();
+
+            swal({
+                title: "Good Job!",
+                text: "İşlem Başarılı!",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Tamam",
+                        value: true,
+                        visible: true,
+                        closeModal: true // Bildirimi otomatik kapatma
+                    }
+                }
+            }).then((value) => {
+                if (value) {
+                    // Ekleme işlemini AJAX ile gerçekleştir
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("UrunEkle", "Urun")', // ControllerName ve action adını uygun şekilde değiştirin
+                        data: $('#cariForm').serialize(), // Form verilerini al
+                        success: function (data) {
+                            // İşlem başarılı olduğunda bu bölüm çalışır
+                            // Burada gerekli yönlendirme veya diğer işlemleri yapabilirsiniz
+                             window.location.href = '@Url.Action("Index", "Urun")'; // Yönlendirme için uygun URL'yi belirtin
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+</form>
+
+
+

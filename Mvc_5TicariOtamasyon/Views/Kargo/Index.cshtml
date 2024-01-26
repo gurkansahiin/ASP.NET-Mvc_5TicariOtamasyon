@@ -1,0 +1,52 @@
+﻿
+@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<KargoDetay>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br /><br />
+@using (Html.BeginForm("Index", "Kargo", FormMethod.Get))
+{
+<p>
+    Kargo Takip No: @Html.TextBox("p")
+    <input type="submit"  value="Ara" />
+</p>
+}
+
+<br />
+
+<table class="table table-striped">
+    <tr>
+
+        <th>Personel </th>
+        <th>Alıcı</th>
+        <th>Kod</th>
+        <th>Tarih</th>
+        <th>Detaylar</th>
+
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+
+            <td class="py-5">@c.personel</td>
+            <td class="py-5">@c.alici</td>
+            <td class="py-5">@c.TakipKod</td>
+            <td class="py-5">@Convert.ToDateTime(c.tarih).ToString("dd/MM/yyyy")</td>
+
+
+
+
+            <td><a href="/Kargo/KargoTakip/@c.TakipKod" class="btn btn-dark  mt-4">Detaylar</a></td>
+
+        </tr>
+    }
+
+
+
+</table>
+<br />
+<a href="/Kargo/KargoEkle" class="btn btn-secondary">Yeni Kargo Girişi</a>
+<a href="/Qr/Index" class="btn btn-warning">QR KOD Oluşturucu</a>

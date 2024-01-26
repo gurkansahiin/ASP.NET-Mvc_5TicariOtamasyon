@@ -1,0 +1,166 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.satis_hareketi
+@{
+    ViewBag.Title = "UrunSatisv2";
+    Layout = "~/Views/Shared/_CariPanelLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/aos.css">
+
+    <link rel="stylesheet" href="~/015 shoppers-gh-pages/css/style.css">
+
+</head>
+<body>
+
+    <div class="site-wrap">
+
+
+        <div class="bg-light py-3">
+            <div class="container">
+                @*<div class="row">
+                        <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
+                    </div>*@
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+                <div class="row mb-5">
+                    <form class="col-md-12 "  method="post" action="/CariPanel/UrunSatisv2">
+                        <div class="site-blocks-table">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Ürün Resmi</th>
+                                        <th class="product-name">Ürün Ad</th>
+                                        <th class="product-price">Fiyat</th>
+                                        <th class="product-quantity">Adet</th>
+                                        <th class="product-total">Total</th>
+                                        <th class="product-total">Satıcı Personel</th>
+                                        <th class="product-remove">Kaldır</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <img src="@ViewBag.resim" alt="Image" class="img-fluid">
+                                        </td>
+                                        <td class="product-name">
+                                            <h2 class="h5 text-black">@ViewBag.ad</h2>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="fiyat" value="@ViewBag.dgr3 " class="form-control" id="txt2" onkeyup="sum();" readonly />
+                                        </td>
+                                        <td>
+                                            <div class="input-group mb-3" style="max-width: 120px;">
+
+                                                <input type="number" class="form-control text-center btn btn-outline-primary " name="adet" min="1" id="txt1" onchange="sum();" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <input type="text" name="toplamtutar" class="form-control" id="txt3" readonly />
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(x => x.personelid, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+                                        </td>
+                                        <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <input type="text" hidden name="urunid" value="@ViewBag.dgr2" />
+                           
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+
+
+                            </div>
+                            <div class="col-md-6 pl-5">
+                                <div class="row justify-content-end">
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-12 text-right border-bottom mb-5">
+                                                <h3 class="text-black h4 text-uppercase"> Maaliyet</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-5">
+                                            <div class="col-md-6">
+                                                <span class="text-black">Total</span>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <strong class="text-black">
+                                                    <input type="text" name="toplamtutar" class="form-control" id="txt4" readonly />
+                                                </strong>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" formmethod="post">Satın Al</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+           
+            </div>
+        </div>
+
+    </div>
+
+    <script src="~/015 shoppers-gh-pages/js/jquery-3.3.1.min.js"></script>
+    <script src="~/015 shoppers-gh-pages/js/jquery-ui.js"></script>
+    <script src="~/015 shoppers-gh-pages/js/popper.min.js"></script>
+    <script src="~/015 shoppers-gh-pages/js/bootstrap.min.js"></script>
+    <script src="~/015 shoppers-gh-pages/js/owl.carousel.min.js"></script>
+    <script src="~/015 shoppers-gh-pages/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/015 shoppers-gh-pages/js/aos.js"></script>
+
+    <script src="~/015 shoppers-gh-pages/js/main.js"></script>
+
+    <script>
+    function sum() {
+        var sayi1 = document.getElementById('txt1').value;
+        var sayi2 = document.getElementById('txt2').value;
+        var sonuc = parseInt(sayi1) * parseInt(sayi2);
+
+        if (!isNaN(sonuc)) {
+            document.getElementById('txt3').value = sonuc;
+            document.getElementById('txt4').value = sonuc;
+        }
+    }
+
+    
+    </script>
+
+</body>
+</html>
+

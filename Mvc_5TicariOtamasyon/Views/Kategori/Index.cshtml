@@ -1,0 +1,80 @@
+﻿@*sınıflarımı eklemiş oldum*@
+@using Mvc_5TicariOtamasyon.Models.sınıflar
+@using PagedList
+@using PagedList.Mvc
+
+
+
+@*// oluşturduğum model liste olarak kategori tablosunu tutacak*@
+@model  PagedList.IPagedList<kategori>
+@*PagedList.IPagedList ise sayfalanmış veriyi temsil eden bir arayüz türüdür.IPagedList arayüzü, genellikle veritabanı sorgularının sonuçlarını sayfalara bölmek ve bu sayfaları kullanıcı arabirimine sunmak için yaygın olarak kullanılır. *@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+
+@using (Html.BeginForm("Index", "Kategori", FormMethod.Get))
+{
+    <p>
+        Kategori Adı: @Html.TextBox("p")
+        <input type="submit" value="ara" />
+    </p>
+
+}
+
+<table class="table table-bordered table-hover" style="margin-top: 20px; ">
+
+
+    @*ben burda bir dögü oluşturdum döngüm k isminde bir değişken içeriyor.k değişkeni modele bağlı.
+        model de kategoriye bağlı.kategori de controller tarafında degerleri döndüren metoda bağlı
+        örneğin   @k.kategoriID dediğimde kategoris tablosundaki  kategoriID bölümüne beni ulaştıracak ama içindeki degere beni
+        KategoriControllersin içindeki  public ActionResult Index() metodu yardımı ile kategoris tablosundaki değerlere ulaşacağım
+    *@
+
+
+
+    <tr>
+        
+        <th class="table-dark">Kategori Ad</th>
+        <th class="table-dark">Sil</th>
+        <th class="table-dark">Güncelle</th>
+
+    </tr>
+
+
+    @foreach (var k in Model)
+    {
+
+        <tr>
+          
+
+            <td>
+                @k.kategoriAD
+
+            </td>
+
+            <td><a href="/Kategori/KategoriSil/@k.kategoriID" class="btn btn-danger">Sil</a></td>  @*kategori controllersinin içindeki KategoriSil actionresultuna gidecek kategoriIDyi tutacak aynı zamanda*@
+            <td><a href="/Kategori/KategoriGetir/@k.kategoriID" class="btn btn-success">Güncelle</a></td>
+
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }),
+new PagedListRenderOptions
+{
+
+    LiElementClasses=new List<string>
+    { "page-link"}
+})
+
+@*((IPagedList)Model) Bu ifade, Model değişkeninin bir tür dönüşümünü yaparak onu IPagedList türüne çeviriyor gibi görünüyor.*@
+@*viewin içindeki Kategori tablosunun içindeki KategoriEkle nin içine yönlendir*@
+
+<a href="/Kategori/KategoriEkle" class="btn btn-primary">Kategori Ekle</a>
+
+
+
+
+
+

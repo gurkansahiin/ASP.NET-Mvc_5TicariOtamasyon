@@ -1,0 +1,25 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.kategori
+@{
+    ViewBag.Title = "KategoriGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Güncelleme Sayfası</h2>
+<br />
+
+@using (Html.BeginForm("KategoriGuncelle", "Kategori", FormMethod.Post)) //bu sayfa yüklendikten sonra post işlemi  gerçekleştirdiğimde hangi ActionResult işlemi çalışacak
+                                                                        //KategoriGuncelle isminde ActionResult tanımladım  Kategori controllerin içinde FormMethod.Post olduğunda çalışacak 
+{
+    <div class="form-group ">
+        @Html.LabelFor(x=>x.kategoriAD)
+        @Html.TextBoxFor(x=>x.kategoriAD ,new {@class= "form-control mt-1 " })
+        @Html.HiddenFor(x=>x.kategoriID)
+        <button class="btn btn-warning mt-3">Güncelle</button>
+    </div>
+
+
+}
+
+
+
+

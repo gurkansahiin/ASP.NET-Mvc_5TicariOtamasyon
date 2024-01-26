@@ -1,0 +1,36 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.cari
+@{
+    ViewBag.Title = "CariGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<br />
+<h2>Güncelleme Sayfası</h2>
+<br />
+
+@using (Html.BeginForm("CariGuncelle", "Cari", FormMethod.Post))
+{
+    @Html.LabelFor(x => x.cariAd)
+    @Html.TextBoxFor(x => x.cariAd, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.cariAd, "", new { @style = "color:red" }) //uyarı mesajı
+    <br />
+    @Html.LabelFor(x => x.cariSoyad)
+    @Html.TextBoxFor(x => x.cariSoyad, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.cariSoyad, "", new { @style = "color:orange" }) //uyarı mesajı
+
+    <br />
+    @Html.LabelFor(x => x.cariSehir)
+    @Html.TextBoxFor(x => x.cariSehir, new { @class = "form-control" })
+
+    <br />
+    @Html.LabelFor(x => x.cariMail)
+    @Html.TextBoxFor(x => x.cariMail, new { @class = "form-control" })
+    <br />
+
+    @Html.HiddenFor(x => x.cariID)
+    <br />
+    <button class="btn btn-info mt-3">Güncelle</button>
+
+}
+

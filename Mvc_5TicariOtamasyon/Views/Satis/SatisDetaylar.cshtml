@@ -1,0 +1,39 @@
+﻿@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<satis_hareketi>
+@{
+    ViewBag.Title = "SatisDetaylar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2 class="fs-4">Satışlar Detay Sayfası </h2>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Ürün</th>
+        <th>Cari</th>
+        <th>Personel</th>
+        <th>Tarih</th>
+        <th>Adet</th>
+        <th>Fiyat</th>
+        <th>Total</th>
+        <th>Yazdır</th>
+    </tr>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.satisID</td>
+            <td>@i.urun.urunAD</td>
+            <td>@i.cari.cariAd @i.cari.cariSoyad</td>
+            <td>@i.personel.PersonelAd @i.personel.PersonelSoyAD</td>
+            <td>@Convert.ToDateTime(i.tarih).ToString("dd/MM/yyyy")</td>
+            <td>@i.adet</td>
+            <td>@i.fiyat</td>
+            <td>@i.toplamtutar</td>
+            <td><a href="/Departman/DepartmanPersSatisYazdır/@i.satisID" class="btn btn-dark">Yazdır</a></td>
+
+        </tr>
+    }
+</table>
+

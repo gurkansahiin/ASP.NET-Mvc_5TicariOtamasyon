@@ -1,0 +1,275 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.faturadinamik
+@{
+    ViewBag.Title = "Dinamik";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+@*1.adım*@
+<div class="panel panel-default">
+    <div class="panel-heading mb-5">
+        <div class="row">
+            <h2 class="panel-title pull-left" style="margin-left:10px;">
+                <strong>Fatura & Kalem İşlemleri</strong>
+                <button style="position:absolute;right:90px;" class="btn btn-primary pull-right" data-toggle="modal" data-target="#newOrderModal" onclick="addNewOrder()">Fatura Girişi</button>
+            </h2>
+        </div>
+    </div>
+
+    @* Fatura Listesi *@
+    @foreach (var item in Model.deger1)
+    {
+        <div class="panel-body mb-5">
+            <table class="table table-striped table-responsive">
+                <tbody>
+                    <tr>
+                        <td>Seri-Sıra No : @item.faturaSeriNo - @item.faturaSıraNo</td>
+                        <td>Tarih : @item.faturaTarih</td>
+                        <td>Vergi Dairesi : @item.vergiDairesi</td>
+                        <td>Teslim Alan : @item.teslimAlan</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Açıklama</th>
+                                        <th>Miktar</th>
+                                        <th>Birim Fiyat</th>
+                                    </tr>
+                                    @{
+                                        var totalBill = 0;
+                                    }
+                                    @foreach (var order in item.faturaKalems)
+                                    {
+                                        <tr>
+                                            <td>@order.aciklama</td>
+                                            <td>@order.miktar</td>
+                                            <td>@order.birimFiyat</td>
+                                        </tr>
+                                        totalBill += Convert.ToInt32(order.tutar);
+                                    }
+                                </tbody>
+                            </table>
+                            <span class="pull-right" style="margin-right:100px;"><strong>Total Fiyat :  </strong> @totalBill ₺</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@* Adım 2 - Modal Penceresi *@
+<div class="modal fade" id="newOrderModal">
+    <div class="modal-dialog modal-lg" style="width: 900px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4>Yeni Fatura Girişi</h4>
+            </div>
+            <form id="NewOrderForm">
+                <div class="modal-body">
+                    @* Fatura Detayları *@
+                    <h5 style="color:#ff6347">Fatura Detayları</h5>
+                    <hr />
+                    <div class="form-horizontal">
+                        <input type="hidden" id="faturaID" />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Seri No</label>
+                                    <input type="text" id="faturaSeriNo" name="faturaSeriNo" placeholder="Seri No" class="form-control" />
+                                </div>
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Sıra No</label>
+                                    <input type="text" id="faturaSıraNo" name="faturaSıraNo" placeholder="Sıra No" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Tarih</label>
+                                    <input type="date" id="faturaTarih" name="faturaTarih" class="form-control" />
+                                </div>
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Vergi Dairesi </label>
+                                    <input type="text" id="vergiDairesi" name="vergiDairesi" placeholder="Vergi Dairesi" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Saat</label>
+                                    <input type="time" id="saat" name="saat" class="form-control" />
+                                </div>
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Teslim Eden </label>
+                                    <input type="text" id="teslimEden" name="teslimEden" placeholder="Teslim Eden" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6 col-xs-12">
+                                    <label class="control-label">Teslim Alan </label>
+                                    <input type="text" id="teslimAlan" name="teslimAlan" placeholder="Teslim Alan" class="form-control" />
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <label class="control-label">Total </label>
+                                    <input type="text" id="toplam" name="toplam" placeholder="toplam" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @* Fatura Kalemleri *@
+                <h5 style="margin-top:10px;color:#ff6347">Fatura Kalemleri</h5>
+                    <hr />
+                    <div class="form-horizontal">
+                        <input type="hidden" id="id" />
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-md-6 col-xs-12 mb-3">
+                                    <label class="control-label">Açıklama </label>
+                                    <input type="text" id="aciklama" name="aciklama" placeholder="aciklama" class="form-control" />
+                                </div>
+                                <div class="col-md-6 col-xs-12  mb-3">
+                                    <label class="control-label">Birim Fiyat </label>
+                                    <input type="text" id="birimFiyat" name="birimFiyat" placeholder="birimFiyat" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6 col-xs-12  mb-3">
+                                    <label class="control-label">Miktar </label>
+                                    <input type="number" id="miktar" name="miktar" placeholder="miktar" class="form-control" />
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-2 col-lg-offset-4">
+                                <a id="addToList" class="btn btn-primary">Listeye Ekle</a>
+                            </div>
+                        </div>
+                        <table id="detailsTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:30%">Aciklama</th>
+                                    <th style="width:20%">Miktar</th>
+                                    <th style="width:15%">Fiyat</th>
+                                    <th style="width:25%">Tutar</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button id="saveOrder" type="submit" class="btn btn-danger">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*Adım 3*@
+
+@section scripts {
+    <script>
+        // Modalı Göster
+        function addNewOrder() {
+            $("#newOrderModal").modal();
+        }
+
+        // Birden Fazla Sipariş Ekle
+        $("#addToList").click(function (e) {
+            e.preventDefault();
+            if ($.trim($("#aciklama").val()) === "" || $.trim($("#birimFiyat").val()) === "" || $.trim($("#miktar").val()) === "") {
+                return;
+            }
+            var aciklama = $("#aciklama").val();
+            var birimFiyat = $("#birimFiyat").val();
+            var miktar = $("#miktar").val();
+            var detailsTableBody = $("#detailsTable tbody");
+            var degerler = '<tr><td>' + aciklama + '</td><td>' + miktar + '</td><td>' + birimFiyat  + '</td><td>' + (parseFloat(birimFiyat) * parseInt(miktar)) + '</td><td><a data-itemId="0" href="#" class="deleteItem">Remove</a></td></tr>';
+            detailsTableBody.append(degerler);
+            clearItem();
+        });
+
+        // Yeni Sipariş Eklendiğinde Formu Temizle
+        function clearItem() {
+            $("#aciklama").val('');
+            $("#birimFiyat").val('');
+            $("#miktar").val('');
+        }
+
+        // Yeni Sipariş Eklendiğinde İsterseniz Kaldırabilirsiniz
+        $(document).on('click', 'a.deleteItem', function (e) {
+            e.preventDefault();
+            var $self = $(this);
+            if ($(this).attr('data-itemId') === "0") {
+                $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        // Tüm Veriyi Controller'a Gönder
+        function saveOrder(data) {
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/Fatura/FaturaKaydet",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    location.reload();
+                },
+                error: function () {
+                    alert("Hata!")
+                }
+            });
+        }
+
+        // Birden Fazla Sipariş Listesini Topla ve Controller'a Gönder
+        $("#saveOrder").click(function (e) {
+            e.preventDefault();
+            var orderArr = [];
+            orderArr.length = 0;
+            $.each($("#detailsTable tbody tr"), function () {
+                orderArr.push({
+                    aciklama: $(this).find('td:eq(0)').html(),
+                    miktar: $(this).find('td:eq(1)').html(),
+                    birimFiyat: $(this).find('td:eq(2)').html(),
+                    tutar: $(this).find('td:eq(3)').html()
+                });
+            });
+            var data = JSON.stringify({
+                faturaSeriNo: $("#faturaSeriNo").val(),
+                faturaSıraNo: $("#faturaSıraNo").val(),
+                faturaTarih: $("#faturaTarih").val(),
+                vergiDairesi: $("#vergiDairesi").val(),
+                saat: $("#saat").val(),
+                teslimAlan: $("#teslimAlan").val(),
+                teslimEden: $("#teslimEden").val(),
+                toplam: $("#toplam").val(),
+                kalemler: orderArr
+            });
+            $.when(saveOrder(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+        });
+
+    </script>
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+

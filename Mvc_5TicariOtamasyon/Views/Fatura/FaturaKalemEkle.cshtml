@@ -1,0 +1,43 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.faturaKalem
+@{
+    ViewBag.Title = "FaturaKalemEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+<br />
+
+<form method="post" class="form-group">
+
+    @Html.LabelFor(x => x.aciklama)
+    @Html.TextBoxFor(x => x.aciklama, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.miktar)
+    @Html.TextBoxFor(x => x.miktar, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.birimFiyat)
+    @Html.TextBoxFor(x => x.birimFiyat, new { @class = "form-control" })
+    <br />
+
+    @Html.LabelFor(x => x.tutar)
+    @Html.TextBoxFor(x => x.tutar, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.faturaid)
+    @Html.TextBoxFor(x => x.faturaid, new { @class = "form-control" })
+
+
+    <button class="btn btn-primary mt-3" id="btn1">Ekle</button>
+
+    <script>
+        $('#btn1').click(function () {
+
+            swal("Good job!", "İşlem Başarılı", "success");
+        });
+    </script>
+</form>
+
+

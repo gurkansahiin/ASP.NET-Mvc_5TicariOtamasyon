@@ -1,0 +1,123 @@
+﻿@model Mvc_5TicariOtamasyon.Models.sınıflar.cari
+
+@using (Html.BeginForm("AyarGuncelle", "CariPanel", FormMethod.Post))
+{
+    <form class="form-horizontal">
+
+        <div class="form-group row">
+
+            <label for="cariAd" class="col-sm-2 col-form-label">Ad</label>
+
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.cariAd, new { @class = "form-control", placeholder = "Ad" })
+
+            </div>
+
+        </div>
+        <div class="form-group row">
+
+            <label for="cariSoyad" class="col-sm-2 col-form-label">Soyad</label>
+
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.cariSoyad, new { @class = "form-control", placeholder = "Soyad" })
+
+            </div>
+
+        </div>
+        <div class="form-group row">
+
+            <label for="cariMail" class="col-sm-2 col-form-label">Email</label>
+
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.cariMail, new { @class = "form-control", placeholder = "Mail" })
+
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <label for="cariSehir" class="col-sm-2 col-form-label">Şehir</label>
+
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.cariSehir, new { @class = "form-control", placeholder = "Sehir" })
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="form-group row">
+
+            <label for="carimeslek" class="col-sm-2 col-form-label">Meslek</label>
+
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.carimeslek, new { @class = "form-control", placeholder = "Meslek" })
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <label for="caritel" class="col-sm-2 col-form-label">Telefon</label>
+
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.caritel, new { @class = "form-control", placeholder = "Telefon" })
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group row">
+
+            <label for="carisifre" class="col-sm-2 col-form-label">Şifre</label>
+
+            <div class="col-sm-10">
+
+                @Html.PasswordFor(x => x.cariSifre, new { @class = "form-control", placeholder = "*****" })
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="offset-sm-2 col-sm-10">
+
+                <div class="checkbox">
+
+                    <label>
+
+                        <input type="checkbox"> Şartları okudum <a href="#">kabul ediyorum.</a>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="offset-sm-2 col-sm-10">
+
+                <button type="submit" class="btn btn-danger">Güncelle</button>
+
+            </div>
+
+        </div>
+
+    </form>
+}

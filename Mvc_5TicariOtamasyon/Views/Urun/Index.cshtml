@@ -1,0 +1,71 @@
+﻿
+@using Mvc_5TicariOtamasyon.Models.sınıflar
+@model List<urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+
+
+
+
+<table class="table table-bordered table-hover" style="margin-top: 20px;" id="tbl1">
+    <thead>
+        <tr class=" text-white table-dark">
+
+        
+            <th>ÜRÜN</th>
+            <th>MARKA</th>
+            <th>STOK</th>
+            <th>ALIŞ FİYATI</th>
+            <th>SATIŞ FİYATI</th>
+            <th>KATEGORİ</th>
+            <th>GÖRSEL</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+            <th>SATIŞ YAP</th>
+
+        </tr>
+    </thead>
+    @foreach (var u in Model)
+    {
+        <tr>
+           
+            <td class="pt-4">@u.urunAD</td>
+            <td class="pt-4">@u.marka</td>
+            <td class="pt-4">@u.stock</td>
+            <td class="pt-4">@u.AlisFiyati ₺</td>
+            <td class="pt-4">@u.SatisFiyati ₺</td>
+            <td class="pt-4">@u.kategori.kategoriAD</td>
+            <td style=" height: 110px; padding: 0;" class="p-2">
+                <img src="@u.urungörsel" class="img-fluid " style="height: 100%; width: 100%; object-fit: cover;" />
+            </td>
+
+            <td><a href="/Urun/UrunSil/@u.urunID" class="btn btn-danger mt-4">SİL</a></td>
+            <td><a href="/Urun/UrunGetir/@u.urunID" class="btn btn-success  mt-4">GÜNCELLE</a></td>
+            <td><a href="/Urun/UrunSatis/@u.urunID" class="btn btn-secondary  mt-4">SATIŞ YAP</a></td>
+        </tr>
+
+
+    }
+</table>
+<a href="/Urun/UrunEkle" class="btn btn-primary">Ürün Ekle</a>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+
+<script>
+    $('#tbl1').dataTable({});
+</script>
+
+
